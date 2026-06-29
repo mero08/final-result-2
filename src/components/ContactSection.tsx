@@ -172,7 +172,7 @@ export default function ContactSection() {
 
         <div className="mt-20 pt-8 border-t border-border text-center">
           <p className="font-mono text-xs text-muted-foreground tracking-widest">
-            © 2024 FARES AZAB · ALL RIGHTS RESERVED
+            © 2025 FARES AZAB · POWERED BY MARWAN ELMOHAMMADI
           </p>
         </div>
       </div>
