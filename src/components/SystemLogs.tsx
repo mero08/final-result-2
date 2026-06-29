@@ -1,10 +1,10 @@
 const logs = [
-  { user: 'SYSTEM_01', message: 'Creative vision is unmatched. Pure cinematic excellence.', time: '14:22:07' },
-  { user: 'CLIENT_AX', message: 'Delivered beyond expectations. Award-worthy production.', time: '09:15:33' },
-  { user: 'COLLAB_07', message: 'Best cinematographer I\'ve worked with. Incredible eye.', time: '21:03:44' },
-  { user: 'REVIEW_12', message: 'Every frame is a painting. Masterful color grading.', time: '16:47:19' },
-  { user: 'AGENT_05', message: 'Fares brings ideas to life like no one else can.', time: '11:38:52' },
-  { user: 'PROD_HEAD', message: 'On time, on budget, and always over-delivering quality.', time: '08:01:17' },
+  { user: 'Henar.Yc', message: 'Creative vision is unmatched. Pure cinematic excellence.', time: '14:22:07' },
+  { user: 'Nouran Waleed', message: 'Great communication and excellent final result.', time: '09:15:33' },
+  { user: 'Doaaboellazm', message: 'Best cinematographer I\'ve worked with. Incredible eye.', time: '21:03:44' },
+  { user: 'Abu_Hanay', message: ' You really understood the vision and made it even better.', time: '16:47:19' },
+  { user: 'Issa_400', message: 'Fares brings ideas to life like no one else can.', time: '11:38:52' },
+  { user: 'Abdullah Arafa', message: 'On time, on budget, and always over-delivering quality.', time: '08:01:17' },
 ];
 
 const doubled = [...logs, ...logs];
