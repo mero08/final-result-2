@@ -6,11 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { id: 1, title: 'Desert Mirage', category: 'Short Film', year: '2024', color: 'from-amber-900/40', youtubeId: '7Z1FKSqVJYg' },
-  { id: 2, title: 'Urban Pulse', category: 'Commercial', year: '2023', color: 'from-blue-900/40', youtubeId: 'dQw4w9WgXcQ' },
-  { id: 3, title: 'Echoes', category: 'Music Video', year: '2023', color: 'from-emerald-900/40', youtubeId: 'dQw4w9WgXcQ' },
-  { id: 4, title: 'The Last Frame', category: 'Documentary', year: '2022', color: 'from-rose-900/40', youtubeId: 'dQw4w9WgXcQ' },
-  { id: 5, title: 'Neon Dreams', category: 'Fashion Film', year: '2022', color: 'from-purple-900/40', youtubeId: 'dQw4w9WgXcQ' },
+  { id: 1, title: 'Desert Mirage', category: 'Short Film', year: '2024', color: 'from-amber-900/40', youtubeId: 'f61OclqoDGU' },
+  { id: 2, title: 'Urban Pulse', category: 'Commercial', year: '2023', color: 'from-blue-900/40', youtubeId: 'YSz86a7bhxk' },
 ];
 
 export default function ProjectsSection() {
