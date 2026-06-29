@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const reels = [
-  { id: 1, title: 'Desert Light', category: 'Cinematic Reel', year: '2024', color: 'from-amber-900/50', videoUrl: 'https://player.mux.com/vZEHrmjJR00QN00M5xSwPhbkvOFjvdeCPvDoR1cgp01pL4?metadata-video-title=7&video-title=7', thumbnail: 'https://image.mux.com/vZEHrmjJR00QN00M5xSwPhbkvOFjvdeCPvDoR1cgp01pL4/thumbnail.jpg?time=2' },
+  { id: 1, title: 'Desert Light', category: 'Cinematic Reel', year: '2024', color: 'from-amber-900/50', videoUrl: 'https://player.mux.com/4253PKq3sD00AG8XafSwdgCp02oaruANEeSE6obQUG01d4?metadata-video-title=7&video-title=7', thumbnail: 'https://image.mux.com/4253PKq3sD00AG8XafSwdgCp02oaruANEeSE6obQUG01d4/thumbnail.jpg?time=2' },
   { id: 2, title: 'Midnight Run', category: 'Action Reel', year: '2024', color: 'from-blue-900/50', videoUrl: 'https://player.mux.com/A0054bey153tzYeOiExyLf02Bv029McbShKIGPP9NRgGT4?metadata-video-title=7&video-title=7', thumbnail: 'https://image.mux.com/A0054bey153tzYeOiExyLf02Bv029McbShKIGPP9NRgGT4/thumbnail.jpg?time=10' },
   { id: 3, title: 'Golden Hour', category: 'Fashion Reel', year: '2023', color: 'from-rose-900/50', videoUrl: 'https://player.mux.com/pEPSVPFqyA00RIppTEjY9JImyY01wuIN62c2RaP1ub7Rc?metadata-video-title=7&video-title=7', thumbnail: 'https://image.mux.com/pEPSVPFqyA00RIppTEjY9JImyY01wuIN62c2RaP1ub7Rc/thumbnail.jpg?time=20' },
   { id: 4, title: 'Raw Frames', category: 'BTS Reel', year: '2023', color: 'from-emerald-900/50', videoUrl: 'https://player.mux.com/lpiHpVOhqWWdb6FxoJh7RZ93d5jEMAH00rKnbF4ABwLY?metadata-video-title=7&video-title=7', thumbnail: 'https://image.mux.com/lpiHpVOhqWWdb6FxoJh7RZ93d5jEMAH00rKnbF4ABwLY/thumbnail.jpg?time=30' },
