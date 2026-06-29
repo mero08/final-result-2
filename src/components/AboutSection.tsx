@@ -88,14 +88,10 @@ export default function AboutSection() {
               <span className="text-gold-gradient">move people</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Hello, I'm Fares, a video editor with over five years of
-              experience. I specialize in short-form content like Reels and
-              YouTube Shorts, as well as longer videos, where every second
-              counts. I don't just edit; I focus on understanding your goal,
-              your audience, and your message to produce clear, engaging, and
-              impactful videos. I'm committed to deadlines and take every
-              project very seriously. My goal is to build long-term
-              relationships based on quality, trust, commitment, and respect.
+              Hello, I'm Fares, I create videos that grab attention and keep people watching.
+              With over 5 years of experience, I work on short-form content, commercials, and long-form videos.
+              My focus is simple: clear storytelling, smooth editing, and strong visuals that help brands and creators share their message
+.
             </p>
           </div>
 
