@@ -6,8 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { id: 1, title: 'Desert Mirage', category: 'Short Film', year: '2024', color: 'from-amber-900/40', youtubeId: 'f61OclqoDGU' },
-  { id: 2, title: 'Urban Pulse', category: 'Commercial', year: '2023', color: 'from-blue-900/40', youtubeId: 'YSz86a7bhxk' },
+  { id: 1, title: 'Gaming content', category: 'Youtube video', year: '2025', color: 'from-amber-900/40', youtubeId: 'f61OclqoDGU' },
+  { id: 2, title: 'Gaming content', category: 'Youtube video', year: '2026', color: 'from-blue-900/40', youtubeId: 'YSz86a7bhxk' },
 ];
 
 export default function ProjectsSection() {
