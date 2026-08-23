@@ -1,36 +1,65 @@
-import { useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function useCinematicFullscreen() {
-  const enterFullscreen = useCallback(async () => {
-    try {
-      await document.documentElement.requestFullscreen();
-      document.documentElement.classList.add('cinematic-fullscreen');
-    } catch {
-      /* fullscreen blocked — site behaves normally, no classes added */
-    }
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const delayRef = useRef<number>();
+
+  const refreshScroll = useCallback(() => {
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      window.clearTimeout(delayRef.current);
+      delayRef.current = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
+    });
   }, []);
+
+  const sync = useCallback(() => {
+    const doc = document as Document & { webkitFullscreenElement?: Element | null };
+    const active = Boolean(document.fullscreenElement ?? doc.webkitFullscreenElement);
+    document.documentElement.classList.toggle("cinematic-fullscreen", active);
+    setIsFullscreen(active);
+    refreshScroll();
+  }, [refreshScroll]);
+
+  const toggleFullscreen = useCallback(async () => {
+    const doc = document as Document & {
+      webkitFullscreenElement?: Element | null;
+      webkitExitFullscreen?: () => Promise<void> | void;
+    };
+    const root = document.documentElement as HTMLElement & {
+      webkitRequestFullscreen?: () => Promise<void> | void;
+    };
+
+    try {
+      const active = document.fullscreenElement ?? doc.webkitFullscreenElement;
+      if (active) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else doc.webkitExitFullscreen?.();
+      } else if (root.requestFullscreen) {
+        await root.requestFullscreen();
+      } else {
+        root.webkitRequestFullscreen?.();
+      }
+    } catch {
+      /* blocked by browser — page stays windowed */
+    }
+    sync();
+  }, [sync]);
 
   useEffect(() => {
-    const onChange = () => {
-      if (document.fullscreenElement) {
-        document.documentElement.classList.add('cinematic-fullscreen');
-      } else {
-        document.documentElement.classList.remove('cinematic-fullscreen');
-      }
-    };
-
-    document.addEventListener('fullscreenchange', onChange);
-    document.addEventListener('webkitfullscreenchange', onChange);
-    document.addEventListener('mozfullscreenchange', onChange);
-    document.addEventListener('MSFullscreenChange', onChange);
-
+    document.addEventListener("fullscreenchange", sync);
+    document.addEventListener("webkitfullscreenchange", sync);
     return () => {
-      document.removeEventListener('fullscreenchange', onChange);
-      document.removeEventListener('webkitfullscreenchange', onChange);
-      document.removeEventListener('mozfullscreenchange', onChange);
-      document.removeEventListener('MSFullscreenChange', onChange);
+      window.clearTimeout(delayRef.current);
+      document.removeEventListener("fullscreenchange", sync);
+      document.removeEventListener("webkitfullscreenchange", sync);
     };
-  }, []);
+  }, [sync]);
 
-  return { enterFullscreen };
+  return { toggleFullscreen, isFullscreen };
 }

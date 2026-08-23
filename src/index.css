@@ -177,18 +177,24 @@
   }
 }
 
-/* Desktop true fullscreen — only applied while browser fullscreen API is active */
+/* Fullscreen must still scroll; overflow:hidden here was freezing the page */
 @media (min-width: 1200px) {
   html.cinematic-fullscreen {
-    width: 100vw;
-    min-height: 100dvh;
-    min-height: 100vh;
-    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
+  html.cinematic-fullscreen body,
   html.cinematic-fullscreen #root {
-    width: 100vw;
-    min-height: 100dvh;
-    min-height: 100vh;
+    width: 100%;
+    min-height: 100%;
+    overflow: visible;
   }
+}
+
+html.reel-modal-open,
+html.reel-modal-open body {
+  overflow: hidden !important;
 }

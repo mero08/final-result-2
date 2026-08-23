@@ -1,5 +1,4 @@
-import { Suspense } from 'react';
-import NebulaBackground from '@/components/NebulaBackground';
+import { lazy, Suspense } from 'react';
 import CustomCursor from '@/components/CustomCursor';
 import ViewfinderHUD from '@/components/ViewfinderHUD';
 import HeroSection from '@/components/HeroSection';
@@ -10,6 +9,8 @@ import ReelsSection from '@/components/ReelsSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import SystemLogs from '@/components/SystemLogs';
 import ContactSection from '@/components/ContactSection';
+
+const NebulaBackground = lazy(() => import('@/components/NebulaBackground'));
 
 const Index = () => {
   return (

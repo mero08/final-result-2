@@ -22,8 +22,10 @@ export default function CommandSidebar() {
         className={`fixed left-0 top-0 h-full z-40 glass-sidebar hidden md:flex flex-col items-center py-8 transition-all duration-500 ${expanded ? 'w-52' : 'w-16'}`}
       >
         <button
+          type="button"
           onClick={() => setExpanded(!expanded)}
-          className="mb-10 p-2 rounded-lg hover:bg-secondary transition-colors"
+          className="mb-10 rounded-lg p-2 transition-colors hover:bg-secondary"
+          aria-label={expanded ? "Collapse navigation" : "Expand navigation"}
           data-cursor-hover
         >
           {expanded ? <X className="w-5 h-5 text-foreground" /> : <Menu className="w-5 h-5 text-foreground" />}
@@ -52,7 +54,9 @@ export default function CommandSidebar() {
 
       {/* Mobile trigger */}
       <button
-        className="fixed top-4 right-4 z-50 p-3 glass-card md:hidden"
+        type="button"
+        className="fixed right-4 top-4 z-50 p-3 glass-card md:hidden"
+        aria-label="Open navigation"
         onClick={() => setMobileOpen(true)}
       >
         <Menu className="w-5 h-5 text-foreground" />
