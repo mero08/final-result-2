@@ -179,17 +179,22 @@
 
 /* Fullscreen must still scroll; overflow:hidden here was freezing the page */
 @media (min-width: 1200px) {
-  html.cinematic-fullscreen,
-  html.cinematic-fullscreen body {
+  html.cinematic-fullscreen {
     width: 100%;
     min-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
   }
 
+  html.cinematic-fullscreen body,
   html.cinematic-fullscreen #root {
     width: 100%;
     min-height: 100%;
     overflow: visible;
   }
+}
+
+html.reel-modal-open,
+html.reel-modal-open body {
+  overflow: hidden !important;
 }

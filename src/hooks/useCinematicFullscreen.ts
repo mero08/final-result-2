@@ -1,17 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function refreshScroll() {
-  requestAnimationFrame(() => {
-    ScrollTrigger.refresh();
-  });
-}
-
 export function useCinematicFullscreen() {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const delayRef = useRef<number>();
+
+  const refreshScroll = useCallback(() => {
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      window.clearTimeout(delayRef.current);
+      delayRef.current = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
+    });
+  }, []);
+
+  const sync = useCallback(() => {
+    const doc = document as Document & { webkitFullscreenElement?: Element | null };
+    const active = Boolean(document.fullscreenElement ?? doc.webkitFullscreenElement);
+    document.documentElement.classList.toggle("cinematic-fullscreen", active);
+    setIsFullscreen(active);
+    refreshScroll();
+  }, [refreshScroll]);
 
   const toggleFullscreen = useCallback(async () => {
     const doc = document as Document & {
@@ -35,24 +48,18 @@ export function useCinematicFullscreen() {
     } catch {
       /* blocked by browser — page stays windowed */
     }
-  }, []);
+    sync();
+  }, [sync]);
 
   useEffect(() => {
-    const sync = () => {
-      const doc = document as Document & { webkitFullscreenElement?: Element | null };
-      const active = Boolean(document.fullscreenElement ?? doc.webkitFullscreenElement);
-      document.documentElement.classList.toggle("cinematic-fullscreen", active);
-      setIsFullscreen(active);
-      refreshScroll();
-    };
-
     document.addEventListener("fullscreenchange", sync);
     document.addEventListener("webkitfullscreenchange", sync);
     return () => {
+      window.clearTimeout(delayRef.current);
       document.removeEventListener("fullscreenchange", sync);
       document.removeEventListener("webkitfullscreenchange", sync);
     };
-  }, []);
+  }, [sync]);
 
   return { toggleFullscreen, isFullscreen };
 }

@@ -46,8 +46,10 @@ export default function ReelsSection() {
   useEffect(() => {
     if (activeReel !== null) {
       setIsLoading(true);
+      document.documentElement.classList.add('reel-modal-open');
       document.body.style.overflow = 'hidden';
       return () => {
+        document.documentElement.classList.remove('reel-modal-open');
         document.body.style.overflow = '';
       };
     }
@@ -119,6 +121,7 @@ export default function ReelsSection() {
           onClick={() => setActiveReel(null)}
         >
           <button
+            type="button"
             onClick={() => setActiveReel(null)}
             className="absolute top-6 right-6 p-2.5 rounded-full bg-black/40 border border-white/20 text-white hover:text-white hover:border-white/60 hover:bg-black/60 transition-all duration-200 cursor-pointer z-[70]"
             aria-label="Close"
@@ -137,6 +140,7 @@ export default function ReelsSection() {
               )}
               <iframe
                 key={activeReel}
+                title={reels.find((r) => r.id === activeReel)?.title ?? "Reel"}
                 src={(() => {
                   const reel = reels.find((r) => r.id === activeReel);
                   return reel ? muxPlayerSrc(reel.playbackId, reel.title) : undefined;
