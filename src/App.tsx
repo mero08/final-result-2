@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Maximize2 } from "lucide-react";
+import { Maximize2, Minimize2 } from "lucide-react";
 import { useCinematicFullscreen } from "@/hooks/useCinematicFullscreen";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  const { enterFullscreen } = useCinematicFullscreen();
+  const { toggleFullscreen, isFullscreen } = useCinematicFullscreen();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -21,13 +21,18 @@ const App = () => {
         <BrowserRouter>
           <div className="relative">
             <button
-              onClick={enterFullscreen}
-              className="fixed bottom-6 left-6 z-50 p-2.5 rounded-full glass-card hidden lg:flex items-center justify-center hover:border-primary/40 transition-all duration-300 group"
-              aria-label="Enter fullscreen"
-              title="Enter fullscreen"
+              type="button"
+              onClick={toggleFullscreen}
+              className="fixed bottom-6 left-6 z-50 hidden items-center justify-center rounded-full p-2.5 glass-card transition-all duration-300 hover:border-primary/40 group lg:flex"
+              aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+              title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
               data-cursor-hover
             >
-              <Maximize2 className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              {isFullscreen ? (
+                <Minimize2 className="h-4 w-4 text-muted-foreground transition-colors duration-300 group-hover:text-primary" />
+              ) : (
+                <Maximize2 className="h-4 w-4 text-muted-foreground transition-colors duration-300 group-hover:text-primary" />
+              )}
             </button>
             <Routes>
               <Route path="/" element={<Index />} />

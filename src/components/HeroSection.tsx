@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef, useState, useEffect } from "react";
+import { lazy, Suspense, useLayoutEffect, useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
-import Model3DViewer from "./Model3DViewer";
+
+const Model3DViewer = lazy(() => import("./Model3DViewer"));
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -296,14 +297,16 @@ export default function HeroSection() {
           style={{ willChange: "transform, opacity" }}
         >
           {isLg && (
-            <Model3DViewer
-              modelPath="/camera_optimized.glb"
-              height="100vh"
-              width="100%"
-              transparent={true}
-              floatEffect={true}
-              showShadow={false}
-            />
+            <Suspense fallback={null}>
+              <Model3DViewer
+                modelPath="/camera_optimized.glb"
+                height="100vh"
+                width="100%"
+                transparent={true}
+                floatEffect={true}
+                showShadow={false}
+              />
+            </Suspense>
           )}
         </div>
       </div>

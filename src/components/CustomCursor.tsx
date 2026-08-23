@@ -1,11 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
+
+function isHoverTarget(node: EventTarget | null) {
+  return node instanceof Element && Boolean(node.closest("a, button, [data-cursor-hover]"));
+}
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let mx = 0, my = 0, dx = 0, dy = 0;
+    let mx = 0;
+    let my = 0;
+    let dx = 0;
+    let dy = 0;
+    let frame = 0;
+    let running = true;
 
     const move = (e: MouseEvent) => {
       mx = e.clientX;
@@ -13,6 +22,7 @@ export default function CustomCursor() {
     };
 
     const tick = () => {
+      if (!running) return;
       dx += (mx - dx) * 0.15;
       dy += (my - dy) * 0.15;
       if (dotRef.current) {
@@ -21,22 +31,30 @@ export default function CustomCursor() {
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${dx - 20}px, ${dy - 20}px)`;
       }
-      requestAnimationFrame(tick);
+      frame = requestAnimationFrame(tick);
     };
 
-    const addHover = () => ringRef.current?.classList.add('scale-150', 'opacity-100');
-    const removeHover = () => ringRef.current?.classList.remove('scale-150', 'opacity-100');
+    const onOver = (e: Event) => {
+      if (isHoverTarget(e.target)) {
+        ringRef.current?.classList.add("scale-150", "opacity-100");
+      }
+    };
+    const onOut = (e: Event) => {
+      const next = (e as MouseEvent).relatedTarget;
+      if (isHoverTarget(next)) return;
+      ringRef.current?.classList.remove("scale-150", "opacity-100");
+    };
 
-    window.addEventListener('mousemove', move);
-    document.querySelectorAll('a, button, [data-cursor-hover]').forEach(el => {
-      el.addEventListener('mouseenter', addHover);
-      el.addEventListener('mouseleave', removeHover);
-    });
-
-    const frame = requestAnimationFrame(tick);
+    window.addEventListener("mousemove", move);
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
+    frame = requestAnimationFrame(tick);
 
     return () => {
-      window.removeEventListener('mousemove', move);
+      running = false;
+      window.removeEventListener("mousemove", move);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
       cancelAnimationFrame(frame);
     };
   }, []);
@@ -45,11 +63,11 @@ export default function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 z-[9999] w-2 h-2 rounded-full bg-primary pointer-events-none mix-blend-difference hidden md:block"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] hidden h-2 w-2 rounded-full bg-primary mix-blend-difference md:block"
       />
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 z-[9998] w-10 h-10 rounded-full border border-primary/50 pointer-events-none transition-all duration-300 ease-out opacity-60 hidden md:block"
+        className="pointer-events-none fixed left-0 top-0 z-[9998] hidden h-10 w-10 rounded-full border border-primary/50 opacity-60 transition-all duration-300 ease-out md:block"
       />
     </>
   );
