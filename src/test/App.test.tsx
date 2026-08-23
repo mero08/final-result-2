@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import App from "@/App";
@@ -8,6 +10,17 @@ vi.mock("@/components/NebulaBackground", () => ({ default: () => null }));
 
 afterEach(() => {
   cleanup();
+});
+
+describe("fullscreen CSS", () => {
+  it("lets the document scroll while cinematic fullscreen is on", () => {
+    const css = readFileSync(resolve(__dirname, "../index.css"), "utf8");
+    const start = css.indexOf("html.cinematic-fullscreen {");
+    expect(start).toBeGreaterThan(-1);
+    const block = css.slice(start, css.indexOf("}", start) + 1);
+    expect(block).toMatch(/overflow-y:\s*auto/);
+    expect(block).not.toMatch(/overflow:\s*hidden/);
+  });
 });
 
 describe("muxPlayerSrc", () => {

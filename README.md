@@ -37,3 +37,5 @@ Public keys are in `ContactSection.tsx`. In the EmailJS dashboard, restrict the 
 ## Deploy
 
 Configured for Vercel (`vercel.json` SPA rewrite). Set the production domain, then deploy the `main` (or `publish-ready`) branch.
+
+After the site has a real HTTPS URL, change `og:image` and `twitter:image` in `index.html` to that absolute URL (PNG/JPG 1200×630 works best for Facebook/LinkedIn; SVG is a placeholder). Drei’s `useGLTF` already enables Meshopt for `public/camera_optimized.glb`.
