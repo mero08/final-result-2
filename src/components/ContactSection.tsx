@@ -20,7 +20,7 @@ export default function ContactSection() {
     try {
       await emailjs.sendForm(
         'service_tn18hsq',   // ← Replace with your EmailJS Service ID
-        'template_f5z20y8',  // ← Replace with your EmailJS Template ID
+        'template_q877xsl',  // ← Replace with your EmailJS Template ID
         formRef.current,
          'FyAwQu-6g8NXX9E7Y',    // ← Replace with your EmailJS Public Key
       );
