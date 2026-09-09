@@ -22,7 +22,7 @@ export default function ContactSection() {
         'service_zox98nj',   // ← Replace with your EmailJS Service ID
         'template_y678vjs',  // ← Replace with your EmailJS Template ID
         formRef.current,
-        { publicKey: 'Hinqv6y1FjDvgogd0' },    // ← Replace with your EmailJS Public Key
+         'Hinqv6y1FjDvgogd0',    // ← Replace with your EmailJS Public Key
       );
       setStatus('sent');
       setForm({ name: '', email: '', phone: '', message: '' });
