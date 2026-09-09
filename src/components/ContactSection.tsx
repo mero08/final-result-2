@@ -19,10 +19,10 @@ export default function ContactSection() {
 
     try {
       await emailjs.sendForm(
-        'service_zox98nj',   // ← Replace with your EmailJS Service ID
-        'template_y678vjs',  // ← Replace with your EmailJS Template ID
+        'service_tn18hsq',   // ← Replace with your EmailJS Service ID
+        'template_f5z20y8',  // ← Replace with your EmailJS Template ID
         formRef.current,
-         'Hinqv6y1FjDvgogd0',    // ← Replace with your EmailJS Public Key
+         'FyAwQu-6g8NXX9E7Y',    // ← Replace with your EmailJS Public Key
       );
       setStatus('sent');
       setForm({ name: '', email: '', phone: '', message: '' });
